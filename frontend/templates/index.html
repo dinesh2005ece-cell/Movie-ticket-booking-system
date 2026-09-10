@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}CineBook | Movie Tickets{% endblock %}
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <p class="eyebrow">YOUR NEXT GREAT STORY</p>
+        <h1>Book Your<br><em>Movie Tickets</em></h1>
+        <p class="hero-copy">Skip the queue, choose your perfect seats of the imagination, and make tonight a movie night.</p>
+        <a class="button primary" href="{{ url_for('movies') }}">Browse Movies <span>→</span></a>
+    </div>
+    <div class="hero-ticket"><span>NOW<br>SHOWING</span><strong>150</strong><small>per ticket</small></div>
+</section>
+<section class="section-head">
+    <div><p class="eyebrow">ON THE BIG SCREEN</p><h2>Featured Movies</h2></div>
+    <a class="text-link" href="{{ url_for('movies') }}">View all movies →</a>
+</section>
+<section class="movie-grid">
+    {% for movie in movies %}
+    <article class="movie-card">
+        <div class="poster poster-{{ loop.index }}"><span>{{ movie.genre }}</span><strong>{{ movie.title[0] }}</strong></div>
+        <div class="movie-info"><h3>{{ movie.title }}</h3><p>{{ movie.language }} · {{ movie.duration }}</p><div class="movie-meta"><span>{{ movie.show_time }}</span><a href="{{ url_for('book') }}">Book →</a></div></div>
+    </article>
+    {% endfor %}
+</section>
+{% endblock %}

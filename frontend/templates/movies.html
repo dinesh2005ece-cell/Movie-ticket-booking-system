@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Movies | CineBook{% endblock %}
+{% block content %}
+<section class="page-header"><div><p class="eyebrow">THE LINEUP</p><h1>All Movies</h1><p>Manage the films currently playing at CineBook.</p></div><a class="button primary" href="{{ url_for('add_movie') }}">+ Add Movie</a></section>
+<section class="movie-grid wide-grid">
+    {% for movie in movies %}
+    <article class="movie-card">
+        <div class="poster poster-{{ (loop.index0 % 3) + 1 }}"><span>{{ movie.genre }}</span><strong>{{ movie.title[0] }}</strong></div>
+        <div class="movie-info"><h3>{{ movie.title }}</h3><p>{{ movie.language }} · {{ movie.duration }}</p><div class="movie-meta"><span>{{ movie.show_time }}</span><span class="actions"><a href="{{ url_for('edit_movie', id=movie.id) }}">Edit</a><a class="danger-link" href="{{ url_for('delete_movie', id=movie.id) }}" onclick="return confirm('Delete this movie?')">Delete</a></span></div></div>
+    </article>
+    {% else %}<div class="empty-state"><h2>No movies yet</h2><p>Add your first movie to get started.</p></div>{% endfor %}
+</section>
+{% endblock %}

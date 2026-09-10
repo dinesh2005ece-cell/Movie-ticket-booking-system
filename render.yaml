@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: cinebook-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /api/health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cinebook-db
+          property: connectionString
+      - key: FRONTEND_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: cinebook-db
+    plan: free

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Book Tickets | CineBook{% endblock %}
+{% block content %}
+<section class="form-page booking-page"><div class="form-heading"><p class="eyebrow">RESERVE YOUR SEATS</p><h1>{{ 'Edit Booking' if booking else 'Book Your Tickets' }}</h1><p>One ticket, one memory. Every ticket is ₹150.</p></div>
+<form class="form-card" method="post">
+    {% if booking %}<input type="hidden" name="booking_id" value="{{ booking.id }}">{% endif %}
+    <label>Customer Name<input type="text" name="customer_name" value="{{ booking.customer_name if booking else '' }}" placeholder="Your full name" required></label>
+    <label>Choose Movie<select name="movie_id" required><option value="">Select a movie</option>{% for movie in movies %}<option value="{{ movie.id }}" {% if booking and booking.movie_id == movie.id %}selected{% endif %}>{{ movie.title }} · {{ movie.show_time }}</option>{% endfor %}</select></label>
+    <label>Number of Tickets<input type="number" name="number_of_tickets" value="{{ booking.number_of_tickets if booking else 1 }}" min="1" max="10" required></label>
+    <div class="price-box"><span>Total Amount</span><strong>₹150 <small>per ticket</small></strong></div>
+    <div class="form-actions"><a class="button muted" href="{{ url_for('bookings') }}">Cancel</a><button class="button primary" type="submit">{{ 'Update Booking' if booking else 'Confirm Booking' }}</button></div>
+</form></section>
+{% endblock %}

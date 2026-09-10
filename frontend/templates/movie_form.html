@@ -1,0 +1,6 @@
+<form class="form-card" method="post">
+    <label>Movie Title<input type="text" name="title" value="{{ movie.title if movie else '' }}" required></label>
+    <div class="form-row"><label>Genre<input type="text" name="genre" value="{{ movie.genre if movie else '' }}" placeholder="Drama" required></label><label>Language<input type="text" name="language" value="{{ movie.language if movie else '' }}" placeholder="English" required></label></div>
+    <div class="form-row"><label>Duration<input type="text" name="duration" value="{{ movie.duration if movie else '' }}" placeholder="2h 10m" required></label><label>Show Time<input type="text" name="show_time" value="{{ movie.show_time if movie else '' }}" placeholder="6:30 PM" required></label></div>
+    <div class="form-actions"><a class="button muted" href="{{ url_for('movies') }}">Cancel</a><button class="button primary" type="submit">Save Movie</button></div>
+</form>
